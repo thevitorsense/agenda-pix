@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amanda Silva • Massagem Tântrica</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FD3A73',
+            secondary: '#FF655B',
+            accent: '#FD3A73',
+            'accent-dark': '#E31B23',
+            'accent-light': '#FF655B',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'YOUR_PIXEL_ID');
+    fbq('track', 'PageView');
+  </script>
+  <!-- End Meta Pixel Code -->
+  
+  <!-- Kwai Pixel Code -->
+  <script>
+    (function(h,o,t,j,a,r){
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:'YOUR_KWAI_ID',hjsv:6};
+      a=o.getElementsByTagName('head')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+  <!-- End Kwai Pixel Code -->
+  <style>
+    .modal-backdrop {
+      background: rgba(0, 0, 0, 0.7);
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 1rem;
+    }
+    .modal-backdrop.show {
+      display: grid;
+    }
+    .modal {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      width: 100%;
+      max-width: 28rem;
+    }
+    [data-selected="true"] {
+      background: linear-gradient(to right, #FD3A73, #FF655B);
+      color: white;
+    }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Meta Pixel Noscript -->
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/>
+  </noscript>
+
+  <nav class="fixed top-0 left-0 right-0 bg-white/10 backdrop-blur-lg z-50">
+    <div class="max-w-lg mx-auto px-4 py-4">
+      <div class="flex justify-center space-x-6">
+        <a href="#home" class="text-white font-medium hover:opacity-100 transition-opacity">Início</a>
+        <a href="#schedule" class="text-white font-medium hover:opacity-100 transition-opacity">Agendar</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="min-h-screen bg-gradient-to-br from-primary via-secondary to-primary">
+    <div class="max-w-lg mx-auto px-4 pt-24 pb-12">
+      <section id="home" class="text-center mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">
+          Massagem Tântrica
+        </h2>
+        <div class="relative w-32 h-32 mx-auto mb-6">
+          <img
+            src="https://images.unsplash.com/photo-1611042553365-9b101441c135?w=400&h=400&fit=crop"
+            alt="Perfil"
+            class="w-full h-full rounded-full object-cover shadow-xl border-4 border-white"
+          />
+          <div class="absolute bottom-2 right-2 flex items-center bg-white rounded-full px-2 py-1 shadow-lg">
+            <div class="w-3 h-3 rounded-full bg-green-500 mr-1"></div>
+            <span class="text-xs font-medium text-gray-700">Online</span>
+          </div>
+        </div>
+        <h1 class="text-3xl font-bold text-white mb-2">
+          Amanda Silva
+        </h1>
+        <div class="flex items-center justify-center text-white/90 mb-4">
+          <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          <span>Florianópolis</span>
+        </div>
+        <p class="text-white/90 max-w-md mx-auto mb-8">
+          Experimente a verdadeira conexão entre corpo e mente através da massagem tântrica.
+          Uma experiência transformadora que liberta tensões e desperta sensações.
+        </p>
+        
+        <div class="space-y-4">
+          <button
+            onclick="showScheduling()"
+            class="w-full py-3 px-6 bg-white text-primary hover:bg-white/90 rounded-full font-semibold transition-colors shadow-lg"
+          >
+            Agendar massagem
+          </button>
+          <a
+            href="https://t.me/amandasilva"
+            target="_blank"
+            rel="noopener noreferrer"
+            onclick="fbq('track', 'Contact')"
+            class="flex items-center justify-center w-full py-3 px-6 bg-white/20 text-white rounded-full font-semibold hover:bg-white/30 transition-colors"
+          >
+            <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m22 2-7 20-4-9-9-4Z" />
+              <path d="M22 2 11 13" />
+            </svg>
+            Vídeos exclusivos
+          </a>
+        </div>
+      </section>
+
+      <section id="schedule" class="mt-20">
+        <div id="scheduling-section" class="hidden bg-white rounded-3xl p-6 shadow-xl">
+          <div id="calendar"></div>
+          <div id="time-slots" class="mt-6 hidden">
+            <h3 class="text-lg font-semibold mb-4 text-gray-800"></h3>
+            <div class="grid grid-cols-2 gap-3"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Payment Modal -->
+  <div id="payment-modal" class="modal-backdrop">
+    <div class="modal">
+      <h3 class="text-xl font-semibold mb-4 text-gray-800">
+        Confirme seu agendamento
+      </h3>
+      <div id="booking-details" class="mb-6 p-4 bg-gray-50 rounded-2xl"></div>
+      <div class="text-center mb-6">
+        <p class="text-gray-500">Para confirmar, conclua o pagamento:</p>
+        <p class="text-3xl font-bold text-primary">R$ 150,00</p>
+        <p class="text-sm text-gray-500 mt-1">
+          Após o pagamento você será direcionado para meu whatsapp pessoal
+        </p>
+      </div>
+      <div id="payment-options" class="space-y-4">
+        <button
+          onclick="copyPixCode()"
+          id="copy-pix-button"
+          class="w-full p-4 bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white rounded-full font-medium transition-all flex items-center justify-center space-x-2 shadow-lg"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
+          <span>Copiar Código PIX</span>
+        </button>
+        <button
+          onclick="verifyPayment()"
+          id="verify-payment-button"
+          class="w-full p-4 bg-gray-100 text-gray-800 rounded-full font-medium hover:bg-gray-200 transition-all"
+        >
+          Já realizei o pagamento
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Global state
+    let selectedDate = null;
+    let selectedTime = null;
+    let pixData = null;
+    let transactionId = null;
+    let checkInterval = null;
+
+    // API Configuration
+    const API_TOKEN = '22087|3sI0vvVA70KRDDPbzH6WZdzr6JWmiYFOiz52H7wCf874b044';
+    const API_BASE = 'https://api.pushinpay.com.br/api';
+
+    // Utility functions
+    function formatDate(date) {
+      const months = [
+        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+      ];
+      return `${date.getDate()} de ${months[date.getMonth()]} de ${date.getFullYear()}`;
+    }
+
+    function generateTimeSlots() {
+      return [
+        { time: '10:00', available: Math.random() > 0.3 },
+        { time: '13:00', available: Math.random() > 0.3 },
+        { time: '15:00', available: Math.random() > 0.3 },
+        { time: '17:00', available: Math.random() > 0.3 },
+        { time: '19:00', available: Math.random() > 0.3 },
+        { time: '21:00', available: Math.random() > 0.3 },
+      ];
+    }
+
+    // Calendar functions
+    function generateCalendar(date) {
+      const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+      const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+      const days = [];
+      
+      for (let d = 1; d <= lastDay.getDate(); d++) {
+        const current = new Date(date.getFullYear(), date.getMonth(), d);
+        days.push({
+          date: current,
+          available: Math.random() > 0.3
+        });
+      }
+
+      const months = [
+        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+      ];
+
+      const calendarHTML = `
+        <div class="rounded-2xl shadow p-4">
+          <div class="flex items-center justify-between mb-4">
+            <button onclick="prevMonth()" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+              <svg class="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+            <h2 class="text-xl font-semibold text-gray-800">
+              ${months[date.getMonth()]} ${date.getFullYear()}
+            </h2>
+            <button onclick="nextMonth()" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+              <svg class="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </div>
+          <div class="calendar-grid mb-2">
+            ${['D', 'S', 'T', 'Q', 'Q', 'S', 'S'].map(day => `
+              <div class="text-center text-sm font-semibold text-gray-400">${day}</div>
+            `).join('')}
+          </div>
+          <div class="calendar-grid">
+            ${Array(firstDay.getDay()).fill(null).map(() => `
+              <div></div>
+            `).join('')}
+            ${days.map(({ date, available }) => `
+              <button
+                onclick="${available ? `selectDate(new Date('${date}'))` : ''}"
+                class="p-2 text-sm rounded-full transition-colors ${
+                  available
+                    ? selectedDate && date.getTime() === selectedDate.getTime()
+                      ? 'bg-primary text-white hover:bg-primary/90'
+                      : 'hover:bg-primary/10 cursor-pointer text-gray-700'
+                    : 'cursor-not-allowed opacity-50'
+                }"
+              >
+                ${date.getDate()}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
+      document.getElementById('calendar').innerHTML = calendarHTML;
+    }
+
+    function showTimeSlots() {
+      const timeSlotsContainer = document.getElementById('time-slots');
+      const timeSlots = generateTimeSlots();
+      
+      timeSlotsContainer.querySelector('h3').textContent = 
+        `Horários disponíveis para ${formatDate(selectedDate)}`;
+      
+      timeSlotsContainer.querySelector('.grid').innerHTML = timeSlots.map(slot => `
+        <button
+          onclick="${slot.available ? `selectTime('${slot.time}')` : ''}"
+          class="p-4 rounded-full text-base font-medium transition-all ${
+            slot.available
+              ? selectedTime === slot.time
+                ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-lg scale-105'
+                : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+              : 'bg-gray-50 text-gray-400 cursor-not-allowed'
+          }"
+        >
+          ${slot.time}
+        </button>
+      `).join('');
+      
+      timeSlotsContainer.classList.remove('hidden');
+    }
+
+    // Navigation functions
+    let currentDate = new Date();
+
+    function prevMonth() {
+      currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1);
+      generateCalendar(currentDate);
+    }
+
+    function nextMonth() {
+      currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1);
+      generateCalendar(currentDate);
+    }
+
+    // Selection functions
+    function selectDate(date) {
+      selectedDate = date;
+      selectedTime = null;
+      generateCalendar(currentDate);
+      showTimeSlots();
+    }
+
+    function selectTime(time) {
+      selectedTime = time;
+      showTimeSlots();
+      
+      if (selectedDate && selectedTime) {
+        const confirmButton = document.createElement('button');
+        confirmButton.className = 'w-full mt-6 py-3 bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white rounded-full font-semibold transition-all shadow-lg';
+        confirmButton.textContent = 'Confirmar Horário';
+        confirmButton.onclick = showPaymentModal;
+        
+        const existingButton = document.querySelector('#scheduling-section > button');
+        if (existingButton) {
+          existingButton.remove();
+        }
+        document.getElementById('scheduling-section').appendChild(confirmButton);
+      }
+    }
+
+    // Scheduling functions
+    function showScheduling() {
+      document.getElementById('scheduling-section').classList.remove('hidden');
+      generateCalendar(currentDate);
+      document.getElementById('schedule').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Payment functions
+    async function generatePixPayment() {
+      try {
+        const response = await fetch(`${API_BASE}/pix/cashIn`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${API_TOKEN}`,
+          },
+          body: JSON.stringify({
+            value: 15000, // R$ 150,00 in cents
+            webhook_url: `${window.location.origin}/api/webhook`,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to generate PIX payment');
+        }
+
+        const data = await response.json();
+        pixData = {
+          id: data.id,
+          qr_code: data.qr_code,
+          qr_code_base64: data.qr_code_base64,
+        };
+        transactionId = data.id;
+        startPaymentCheck();
+      } catch (error) {
+        console.error('Error generating PIX payment:', error);
+        alert('Erro ao gerar o pagamento. Tente novamente.');
+      }
+    }
+
+    async function checkPaymentStatus() {
+      try {
+        const response = await fetch(`${API_BASE}/transaction/${transactionId}`, {
+          headers: {
+            'Authorization': `Bearer ${API_TOKEN}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to check payment status');
+        }
+
+        const data = await response.json();
+        return data.status;
+      } catch (error) {
+        console.error('Error checking payment status:', error);
+        throw error;
+      }
+    }
+
+    function startPaymentCheck() {
+      checkInterval = setInterval(async () => {
+        try {
+          const status = await checkPaymentStatus();
+          if (status === 'paid' || status === 'approved') {
+            clearInterval(checkInterval);
+            handlePaymentSuccess();
+          }
+        } catch (error) {
+          console.error('Error checking payment status:', error);
+        }
+      }, 2000);
+    }
+
+    function showPaymentModal() {
+      if (window.fbq) {
+        fbq('track', 'Schedule');
+      }
+      
+      const modal = document.getElementById('payment-modal');
+      const details = document.getElementById('booking-details');
+      
+      details.innerHTML = `
+        <p class="text-sm text-gray-500">Data:</p>
+        <p class="font-medium text-gray-800">${formatDate(selectedDate)}</p>
+        <p class="text-sm text-gray-500 mt-2">Horário:</p>
+        <p class="font-medium text-gray-800">${selectedTime}</p>
+      `;
+      
+      modal.classList.add('show');
+      generatePixPayment();
+    }
+
+    async function copyPixCode() {
+      if (pixData?.qr_code) {
+        try {
+          await navigator.clipboard.writeText(pixData.qr_code);
+          const button = document.getElementById('copy-pix-button');
+          const originalContent = button.innerHTML;
+          button.innerHTML = `
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            <span>Código PIX Copiado!</span>
+          `;
+          setTimeout(() => {
+            button.innerHTML = originalContent;
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy:', err);
+          alert('Erro ao copiar o código PIX');
+        }
+      }
+    }
+
+    async function verifyPayment() {
+      if (!transactionId) return;
+      
+      const button = document.getElementById('verify-payment-button');
+      const originalText = button.textContent;
+      button.innerHTML = `
+        <svg class="w-5 h-5 animate-spin mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 6v6l4 2" />
+        </svg>
+        Verificando pagamento...
+      `;
+      button.disabled = true;
+      
+      try {
+        const status = await checkPaymentStatus();
+        if (status === 'paid' || status === 'approved') {
+          handlePaymentSuccess();
+        } else {
+          alert('Pagamento ainda não confirmado. Tente novamente em alguns instantes.');
+        }
+      } catch (error) {
+        alert('Erro ao verificar pagamento. Tente novamente.');
+      } finally {
+        button.textContent = originalText;
+        button.disabled = false;
+      }
+    }
+
+    function handlePaymentSuccess() {
+      alert('Pagamento confirmado! Você será redirecionado para o WhatsApp.');
+      document.getElementById('payment-modal').classList.remove('show');
+      window.location.href = 'https://wa.me/5548999999999';
+    }
+
+    // Initialize calendar
+    generateCalendar(currentDate);
+  </script>
+</body>
+</html>
